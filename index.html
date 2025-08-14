@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exam Revision Game</title>
+  <style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(to bottom right, #00ff00, #0000ff);
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+button, input[type="submit"] {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #ffffff;
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover, input[type="submit"]:hover {
+  background-color: #dddddd;
+}
+
+input[type="text"], textarea {
+  width: 90%;
+  max-width: 600px;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: none;
+  margin-bottom: 10px;
+}
+
+  @media (min-width: 768px) {
+  body {
+    font-size: 1.2rem;
+    padding: 40px;
+  }
+
+  .category-buttons button {
+    padding: 20px 40px;
+    font-size: 1.4rem;
+    min-width: 220px;
+    min-height: 70px;
+  }
+
+  h1 {
+    font-size: 2.8rem;
+  }
+
+  textarea, input[type="text"] {
+    font-size: 1.2rem;
+  }
+
+  button, input[type="submit"] {
+    font-size: 1.2rem;
+    padding: 12px 30px;
+  }
+}
+
+  input, textarea, button {
+    font-size: 1.2rem;
+  }
+}
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+      background-size: 400% 400%;
+      animation: rainbow 10s ease infinite;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    @keyframes rainbow {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+
+    .level-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .level-buttons button {
+      padding: 10px 20px;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .question-box {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 20px;
+      border-radius: 15px;
+      margin-top: 20px;
+    }
+
+    textarea {
+      width: 90%;
+      height: 100px;
+      margin-top: 10px;
+    }
+
+    .results {
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎯BCA 5th sem(2025) mid1 important question Revision Quiz Game</h1>
+  <h4><marquee>  tanya's quiz game...lets learn and remember exam prep has never been this easy 💖💖 </marquee></h4>
+
+  <div class="level-buttons">
+    <button onclick="loadLevel('python')">1. Python</button>
+    <button onclick="loadLevel('datasci')">2. Foundations of Data Science</button>
+    <button onclick="loadLevel('php')">3. Web Dev (PHP)</button>
+    <button onclick="loadLevel('webprog')">4. Web Programming</button>
+    <button onclick="loadLevel('env')">5. Environmental Science</button>
+    <button onclick="loadLevel('ml')">6. Machine Learning</button>
+    <button onclick="loadLevel('analytics')">7. Data Analytics</button>
+  </div>
+
+  <div class="question-box" id="questionBox">
+    <h2>Select a level to start</h2>
+  </div>
+
+  <script>
+    const questions = {
+      python: [
+        {
+          q: "State any features of Python. [10 marks]",
+          keywords: ["easy", "interpreted", "object-oriented", "dynamic typing", "portable", "extensible", "open-source", "large library", "simple syntax", "cross-platform"]
+        },
+        {
+          q: "List any string handling functions in Python. [10 marks]",
+          keywords: ["upper", "lower", "strip", "replace", "find", "split", "join", "capitalize", "title", "startswith"]
+        },
+        {
+          q: "Explain the use of 'for' loop in Python. [10 marks]",
+          keywords: ["iteration", "range", "loop", "list", "repetition", "sequence", "control", "index", "array", "block"]
+        },
+        {
+          q: "looping statements in python",
+          keywords: ["while", "do while", "For loop"]
+        }
+      ],
+      datasci: [
+        {
+
+  q: "Explain the benefits  of Data Science . [5  marks]",
+  keywords: [
+    "1. Improved decision making ",
+    "2. Enhanced performance measurement ",
+    "3. Provides financial insight and optimization",
+    "4.  product development",
+    "5.  risk mitigation ",
+    "6. Detects  fraud ",
+    "7.  competitive advantage ",
+    "8. Identifies customer behavior and preferences",
+    "9. Supports strategic planning with reliable data",
+    "10. Improves efficiency and productivity"
+  ]
+
+        },
+{
+  q: "Explain the main data science processing steps (step-by-step). [10 marks]",
+  keywords: [
+    "1. Understanding the problem domain",
+    "2. Data collection",
+    "3. Data preparation",
+    "4.Data transformation ",
+    "4. EDA(exploratory data analysis",
+    "5. Data modelling",
+    "6. Data evaluation",
+    "7. Model deployment"
+  ]
+},
+{
+  q: "What is EDA in Data Science? [5 marks]",
+  keywords: [
+    "1. EDA stands for Exploratory Data Analysis",
+    "2. It is the process of analyzing datasets",
+    "3. Helps to summarize main characteristics of data",
+    "4. Often uses visual methods like bar charts, histograms, scatter plots, and box plots",
+    "5. Detects patterns, anomalies, correlations, and relationships in the data"
+  ]
+},{
+  q: "Explain Data Integration in Data Science. [5 marks]",
+  keywords: [
+    "1. Data integration is the process of combining data from different sources into a unified view, it can be done in two ways namely:",
+    "2. Loose coupling means systems share data with minimal dependency",
+    "3. Tight coupling means systems are closely linked for real-time data sharing",
+    "4. Issues include schema integration issues, redundancy, and data value conflict",
+    "5. Ensures consistent, accurate, and usable data for analysis"
+  ]
+},
+{
+  q: "What is Big Data? [5 marks]",
+  keywords: [
+    "1. Big Data refers to extremely large and complex datasets that traditional systems cannot handle",
+    "2. Can be structured data such as tables in databases",
+    "3. Can be unstructured data such as text, images, videos, and social media content",
+    "4. Can be semi-structured data such as JSON, XML, or log files",
+    "5. Defined by the 5 Vs: Volume, Velocity, Variety, Veracity, and Value"
+  ]
+},
+{
+  q: "Explain Data Cleaning in Data Science. [10 marks]",
+  keywords: [
+    "1. Data cleaning is the process of detecting and correcting errors in datasets",
+    "2. Removes inaccurate, incomplete, or irrelevant data",
+    "3. Handles missing values through imputation or removal",
+    "4. Removes duplicate records to ensure uniqueness",
+    "5. Corrects inconsistent data formats and units",
+    "6. Identifies and handles outliers",
+    "7. Resolves spelling and typographical errors",
+    "8. Standardizes data for uniformity",
+    "9. Ensures data accuracy and reliability",
+    "10. Improves the quality of data for analysis and modeling"
+  ]
+},
+{
+  q: "Data Transformation. [10 marks]",
+  keywords: [
+    "Data transformation converts raw data into a clean, consistent, and usable format suitable for analysis, reporting, or storage",
+    "Normalization: scales data to a standard range, usually 0 to 1",
+    "Standardization: transforms data to have a mean of 0 and standard deviation of 1",
+    "Encoding: converts categorical variables into numerical values (e.g., one-hot encoding, label encoding)",
+    "Aggregation: summarizes data, e.g., sums, averages, or counts over groups",
+    "Filtering: removes unwanted or irrelevant data from the dataset",
+    "Feature Extraction: creates new features from existing data to improve model performance",
+    "Pivoting: reshapes data from long format to wide format or vice versa",
+    "Handling Missing Values: fills, imputes, or removes missing data",
+    "Outlier Treatment: detects and corrects or removes extreme values that can distort analysis"
+  ]
+},
+{
+  q: "How to Launch IPython Shell. [5 marks...]",
+  keywords: [
+    "Definition: Enhanced interactive Python shell...to launch follow these steps",
+    "Installation: pip install ipython",
+    "Launch: Open terminal/command prompt → type ipython",
+    "Prompt: >>> or In [1]:",
+    "Exit: exit() or Ctrl + D",
+    "Run Scripts: %run script_name.py"
+  ]
+},{
+  q: "Shell Commands in IPython. [5 marks]",
+  keywords: [
+    "!ls → List files and directories",
+    "!pwd → Show current working directory",
+    "!cd <directory> → Change directory (subprocess only)",
+    "!mkdir <folder> → Create a new directory",
+    "!rmdir <folder> → Remove an empty directory",
+    "!rm <file> → Delete a file",
+    "!!<command> → Execute a command and store output as a list"
+  ]
+}
+
+  
+        
+      ],
+      php: [
+        {
+          q: "Explain the role of PHP in web development. [10 marks]",
+          keywords: ["server-side", "scripting", "dynamic", "HTML", "database", "form", "backend", "POST", "GET", "MySQL"]
+        },
+        
+{
+  q: "State any 10 features of PHP. [10 marks]",
+  keywords: ["Platform independent", "Open-source", "Case sensitive", "Scripting language", "Error managed", "Power popular applications", "Easy syntax", "Loosly typed", "Logged accessibility", "Secure"]
+},
+{
+  q: "Explain the scope of variables in PHP. [10 marks]",
+  keywords: ["scope", "local", "global", "static", "function", "access", "variable", "inside", "outside", "visibility"]
+},
+{
+  q: "List and explain any operators used in PHP. [10 marks]",
+  keywords: ["arithmetic", "assignment", "comparison", "logical", "increment\decrement","string","conditional" ]
+},
+{
+  q: "Explain how to access php (step-by-step). [5 marks]",
+  keywords: [
+    "1. Install a server like XAMPP or WAMP",           // server environment
+    "2. Save PHP files in the htdocs folder",           // file placement
+    "3. Start Apache server in XAMPP control panel",    // server activation
+    "4. Open browser and type localhost/filename.php",  // browser access
+    "5. PHP runs on the server and outputs results"      // execution explanation
+  ]
+}
+        
+      ],
+      webprog: [
+        {
+          q: "What are the key elements of HTML? [10 marks]",
+          keywords: ["tags", "doctype", "head", "body", "title", "<div>", "span", "p", "a", "img", ]
+        },
+{
+  q: "List common HTML tags and their use. [10 marks]",
+  keywords: ["1.text formatting tags: eg: h1-h6 ,p ,b ,i ,u ,br " , "2.structural tags eg: html ,head , title ,body ",  "3.link and media tags: eg: a ,img , video ,iframe ", "4.list tags: eg ul ,ol ,li ", "5.table tags: eg   table  ,tr ,th ,td ", "6.form tags: eg form ,input ,textarea , button, select", "7.container tags :eg  div, span,section,"],
+},
+{
+  q: "List applications of web programming. [10 marks]",
+  keywords: [" 1.E commerce websites eg.Amazon",   "2.blogs",  " 3.health care portals",  "4.social media platforms eg.fb, twitter",  "5.online education systems",  "6.web apps",  "7.content management systems",  "8.forums",  "9.banking portal"]
+},
+{
+  q: "What are the components of web programming? [10 marks]",
+  keywords: ["html", "css", "javascript", "frontend", "backend", "server", "database", "client", "api", "framework"]
+}
+      ],
+      env: [
+        {
+          q: "List environmental pollution types. [10 marks]",
+          keywords: ["air", "water", "soil", "noise", "radioactive", "thermal", "visual", "light", "plastic", "industrial"]
+        }
+      ],
+      ml: [
+        {
+          q: "Name any applications of machine learning. [10 marks]",
+          keywords: ["prediction", "recommendation", "classification", "regression", "vision", "speech", "robotics", "AI", "finance", "healthcare"]
+        },
+                {
+  q: "Explain Machine Learning and its types. [5 marks]",
+  keywords: [
+    "1. Machine Learning is a branch of Artificial Intelligence that enables systems to learn from data and improve without being explicitly programmed it exists in 4 types namely",
+    "2. Supervised Learning: Models are trained on labeled data to predict outcomes (e.g., classification, regression)",
+    "3. Unsupervised Learning: Models analyze unlabeled data to find patterns or groupings (e.g., clustering, association rules)",
+    "4. Semi-Supervised Learning: Uses a mix of labeled and unlabeled data for training to improve accuracy",
+    "5. Reinforcement Learning: An agent learns by interacting with an environment and receiving rewards or penalties"
+  ]
+},
+{
+  q: "Explain the main data types used in Machine Learning. [5 marks]",
+  keywords: [
+    "1. Data types in Machine Learning can be classified into two main categories: Numerical and Categorical",
+    "2. Numerical Data: Represents measurable quantities",
+    "3. Numerical Data is subdivided into Continuous (e.g., temperature, height) and Discrete (e.g., number of students, items sold)",
+    "4. Categorical Data: Represents qualitative values or labels",
+    "5. Categorical Data is subdivided into Ordinal (ordered categories like rankings) and Nominal (unordered categories like colors)"
+  ]
+},
+{
+  q: "Explain the process of selecting a model in Machine Learning. [unit 2]",
+  keywords: [
+    "Model selection is the process of choosing the most appropriate Machine Learning algorithm for a given problem to achieve the best performance...it follows the following selection steps",
+    "1. Formulate the problem: Clearly define the task and the expected output",
+    "2. Choose potential models: Select algorithms that are suitable for the problem type and data",
+    "3. Do hyperparameter tuning: Adjust model parameters to optimize performance",
+    "4. Train and evaluate each model: Use training data and appropriate evaluation metrics",
+    "5. Compare the performance and accuracy", 
+    "6. finalize the best suited model",
+  ]
+},{
+  q: "Explain Training a Model in Machine Learning and common training methods. [unit 2]",
+  keywords: [
+    "Training a model is the process of teaching a Machine Learning algorithm to recognize patterns in data and make accurate predictions...it can be done using these methods..",
+    "1. Holdout Method: Splitting data into training 80 % and testing sets 20%  to evaluate performance",
+    "2. K-Fold Cross Validation: Dividing data into k equal parts, training on k-1 parts, and testing on the remaining part in turns",
+    "3. Bootstrap Sampling: Random sampling with replacement to create multiple training datasets",
+    "4. Lazy Learner vs Eager Learner: Lazy learners store training data and generalize at query time, eager learners build a model during training",
+    "5. Leave-One-Out Cross Validation (LOOCV): Using one observation for testing and the rest for training, repeated for all observations",
+    "6. Stratified Cross Validation: Ensuring each fold has the same class proportion as the original dataset"
+  ]
+},
+{
+  q: "Explain Feature Transformation in Machine Learning and its main techniques. [unit 2]",
+  keywords: [
+    "Feature transformation is the process of converting data features into a suitable format or scale to improve model performance...ot exist in the following types",
+    "1. Function Transformation: Applying mathematical functions to features to change their distribution",
+    "   - Log Transformation: Reduces skewness and handles exponential growth patterns",
+    "   - Square Transformation: Emphasizes larger values",
+    "   - Reciprocal Transformation: Inverts values to reduce the effect of large numbers",
+    "   - Custom Transformation: User-defined functions for specific needs",
+    "2. Power Transformation: Adjusts data distribution to approximate normality",
+    "   - Box-Cox Transformation: Applies a parameterized power transform to stabilize variance",
+    "   - Two Johnson Transformations: Converts non-normal data to normal distribution using Johnson’s SU and SB families",
+    "3. Quantile Transformation: Maps data to a uniform or normal distribution based on rank"
+  ]
+}
+      ],
+      analytics: [
+        {
+          q: "What are common data analytics tools? [10 marks]",
+          keywords: ["excel", "python", "r", "sql", "tableau", "power bi", "sas", "spark", "hadoop", "jupyter"]
+        },
+  {
+    q: "calculate correlation of any data..use these steps. [5 marks]",
+    keywords: [
+      "The correlation coefficient (r) measures the strength and direction of the linear relationship between two variables",
+      "Formula: r = Σ[(xᵢ - x̄)(yᵢ - ȳ)] / √[Σ(xᵢ - x̄)² × Σ(yᵢ - ȳ)²]",
+      "1. List the paired data values for variables X and Y",
+      "2. Calculate the mean of X (x̄) and the mean of Y (ȳ)",
+      "3. Find deviations (xᵢ - x̄) and (yᵢ - ȳ) for each pair",
+      "4. Multiply deviations for each pair and sum the results: Σ[(xᵢ - x̄)(yᵢ - ȳ)]",
+      "5. Calculate Σ(xᵢ - x̄)² and Σ(yᵢ - ȳ)² separately",
+      "6. Apply the formula to find r",
+      "7. Interpret: r ranges from -1 (perfect negative) to +1 (perfect positive), with 0 meaning no linear correlation"
+    ]
+  },
+  {
+    q: "Calculate Spearman’s rank correlation with tied ranks. [10 marks]",
+    keywords: [
+      "Spearman’s rank correlation (rho) measures the strength of a monotonic relationship between two variables using ranks",
+      "Formula: rho = 1 - [6(Σ d^2 + T_x + T_y)] / [n(n^2 - 1)]",
+      "Tie correction formula: T = Σ (t^3 - t) / 12, where t = number of tied values in a group",
+      "1. List all paired observations (X, Y)",
+      "2. Rank X values (if there are ties, assign the average of the tied positions)",
+      "3. Rank Y values (if there are ties, assign the average of the tied positions)",
+      "4. Calculate d = rankX - rankY for each pair and then compute d^2",
+      "5. Add up all d^2 values",
+      "6. Calculate T_x and T_y using the tie correction formula for X and Y ties",
+      "7. Substitute Σ d^2, T_x, T_y, and n into the formula to find rho",
+      "8. Interpret: rho close to +1 → strong positive correlation, rho close to -1 → strong negative correlation, rho near 0 → weak or no correlation"
+    ]
+  },
+  {
+    q: "Define regression and explain the types of regression in Data Analytics methods. [10 marks]",
+    keywords: [
+      "Definition: In Data Analytics, regression is a predictive modeling technique used to estimate relationships between a dependent variable (target) and one or more independent variables (features)",
+      "Purpose: To make predictions, identify trends, and understand how variables influence outcomes",
+      "Formula (Linear Regression): ŷ = β₀ + β₁x₁ + β₂x₂ + ... + βₙxₙ",
+      "Formula (Logistic Regression): P(Y=1) = 1 / (1 + e^-(β₀ + β₁x₁ + β₂x₂ + ... + βₙxₙ))",
+      "1. Linear Regression – estimates continuous numeric outcomes; can be simple or multiple",
+      "2. Logistic Regression – used for binary or categorical classification problems",
+      "3. Polynomial Regression – captures nonlinear trends by adding polynomial terms",
+      "4. Ridge Regression – applies L2 regularization to reduce overfitting in models",
+      "5. Lasso Regression – applies L1 regularization; can also remove irrelevant features",
+      "6. Elastic Net Regression – blends ridge and lasso penalties for balanced performance",
+      "7. Quantile Regression – predicts conditional quantiles instead of just the mean",
+      "8. Robust Regression – minimizes the impact of outliers on model performance"
+    ]
+  },
+  {
+  q: "Define and calculate the regression line of Y on X. [7 marks]",
+  keywords: [
+    "Regression line of Y on X predicts Y from given X values",
+    "General equation: Y = a + bX",
+    "Slope formula: b = [ΣXY - (ΣXΣY)/n] / [ΣX² - (ΣX)²/n]",
+    "Intercept formula: a = Ȳ - b * X̄",
+    "1. List paired data (X, Y)",
+    "2. Calculate ΣX, ΣY, ΣXY, ΣX²",
+    "3. Compute slope (b) using formula",
+    "4. Compute intercept (a) using formula",
+    "5. Write regression equation Y = a + bX",
+    "6. Interpretation: shows average change in Y for each unit change in X"
+  ]
+},
+{
+  q: "Fit a straight line to data using the Normal Equations method. [7 marks]",
+  keywords: [
+    "The goal is to find the best fit line y = a + bx using least squares method",
+    "Normal Equations: Σy = n·a + b·Σx  and  Σxy = a·Σx + b·Σx²",
+    "1. List paired data (x, y) in a table",
+    "2. Compute Σx, Σy, Σxy, and Σx²",
+    "3. Form the two normal equations using the formulas",
+    "4. Solve the two equations simultaneously to find a (intercept) and b (slope)",
+    "5. Write the regression equation: y = a + bx",
+    "6. Interpretation: The line minimizes the sum of squared vertical deviations from data points"
+  ]
+},
+{
+  q: "Define correlation and explain types of correlation. [7 marks]",
+  keywords: [
+    "Correlation measures the strength and direction of a relationship between two variables",
+    "It is expressed by a coefficient (r) ranging from -1 to +1",
+    "Types of correlation:",
+    "1. Positive correlation – as one variable increases, the other also increases (e.g., height & weight)",
+    "2. Negative correlation – as one variable increases, the other decreases (e.g., speed & travel time)",
+    "3. Zero correlation – no relationship between the variables (e.g., shoe size & intelligence)",
+    "4. Perfect correlation – r = +1 or r = -1, showing an exact linear relationship",
+    "5. Partial correlation – measures correlation between two variables while controlling other variables"
+  ]
+},
+{
+  q: "Calculate Spearman’s rank correlation for untied ranks. [7 marks]",
+  keywords: [
+    "Spearman’s rank correlation (rho) measures the strength and direction of a monotonic relationship between ranked data",
+    "Formula:  ρ = 1 - (6 Σd²) / [n(n² - 1)]",
+    "Where: d = difference between the ranks of each pair, n = number of observations",
+    "Steps:",
+    "1. List the paired observations (X, Y)",
+    "2. Assign ranks to X values and Y values (no ties here)",
+    "3. Compute d = rankX - rankY for each pair",
+    "4. Square each difference to get d² and find Σd²",
+    "5. Substitute Σd² and n into the formula",
+    "6. Interpret ρ: +1 = perfect positive, -1 = perfect negative, 0 = no correlation"
+  ]
+},
+{
+  q: "Properties of the Correlation Coefficient. [7 marks]",
+  keywords: [
+    "Measures the strength and direction of a linear relationship between two variables",
+    "Range of coefficient: -1 ≤ r ≤ +1",
+    "r = +1 → perfect positive linear correlation",
+    "r = -1 → perfect negative linear correlation",
+    "r = 0 → no linear correlation between variables",
+    "Symmetric: correlation of X with Y is the same as Y with X",
+    "Unit-free: unaffected by changes in the units of measurement",
+    "Only measures linear relationships, not non-linear associations",
+    "Adding a constant to X or Y does not change r; multiplying by a positive constant does not change r, multiplying by a negative constant reverses the sign",
+    "Affected by outliers: extreme values can distort r",
+    "Correlation does not imply causation"
+  ]
+}
+      ]
+    };
+
+    function loadLevel(level) {
+      const box = document.getElementById("questionBox");
+      box.innerHTML = "";
+      questions[level].forEach((item, index) => {
+        const qDiv = document.createElement("div");
+        qDiv.innerHTML = `
+          <h3>Q${index + 1}: ${item.q}</h3>
+          <textarea id="ans_${level}_${index}" placeholder="Enter answers as points..."></textarea>
+          <br/>
+          <button onclick="checkAnswer('${level}', ${index})">Submit</button>
+          <div class="results" id="res_${level}_${index}"></div>
+        `;
+        box.appendChild(qDiv);
+      });
+    }
+function checkAnswer(level, index) {
+  const userInput = document.getElementById(`ans_${level}_${index}`).value.toLowerCase();
+  const keywords = questions[level][index].keywords;
+  let score = 0;
+  let matched = [];
+
+  keywords.forEach((word) => {
+    if (userInput.includes(word)) {
+      score += 1;
+      matched.push(word);
+    }
+  });
+
+  const result = document.getElementById(`res_${level}_${index}`);
+  result.innerHTML = `
+    <p><strong>Score:</strong> ${score}/10</p>
+    <p><strong>Matched:</strong><br/> ${matched.map(word => `• ${word}`).join("<br/>")}</p>
+    <p><strong>Expected keywords:</strong><br/> ${keywords.map(word => `• ${word}`).join("<br/>")}</p>
+  `;
+}
+  </script>
+</body>
+</html>
